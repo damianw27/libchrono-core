@@ -12,6 +12,23 @@
   "repository": {
     "url": "https://github.com/damianw27/libchrono.git"
   },
+  "keywords": [
+    "duration",
+    "parser",
+    "validator",
+    "time",
+    "string",
+    "parse",
+    "validate",
+    "math",
+    "operations",
+    "weeks",
+    "days",
+    "hours",
+    "minutes",
+    "seconds",
+    "milliseconds"
+  ],
   "scripts": {
     "build-grammar": "antlr4ts -o ./src/generated ./src/antlr/Duration.g4",
     "build-lib": "webpack && tsc-alias -p tsconfig.json",
