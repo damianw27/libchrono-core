@@ -1,8 +1,12 @@
 {
   "name": "@libchrono/core",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Small library to handle durations parsing and displaying.",
-  "main": "dist/libchrono.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
   "author": "Damian Wileński",
   "license": "MIT",
   "scripts": {
@@ -17,6 +21,7 @@
     "@typescript-eslint/parser": "^5.55.0",
     "antlr4ts-cli": "^0.5.0-alpha.4",
     "compression-webpack-plugin": "^10.0.0",
+    "dts-loader": "^0.1.8",
     "eslint": "^8.36.0",
     "eslint-config-alloy": "^4.9.0",
     "eslint-config-prettier": "^8.7.0",
