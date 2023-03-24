@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "es2016",
+    "outDir": "./dist",
+
+    /* Modules */
+    "module": "commonjs",
+
+    /* JavaScript Support */
+    "allowJs": true,
+
+    /* Emit */
+    "declaration": true,
+
+    /* Interop Constraints */
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+
+    /* Completeness */
+    "skipLibCheck": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "$root/*": ["src/*"],
+      "$core/*": ["src/core/*"],
+      "$generated/*": ["src/generated/*"],
+      "$terms/*": ["src/terms/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

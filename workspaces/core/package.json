@@ -1,0 +1,43 @@
+{
+  "name": "@libchrono/core",
+  "version": "1.0.0",
+  "description": "Small library to handle durations parsing and displaying.",
+  "main": "dist/index.js",
+  "author": "Damian Wileński",
+  "license": "MIT",
+  "scripts": {
+    "grammar:build": "antlr4ts -o ./src/generated ./src/antlr/Duration.g4",
+    "lib:build": "webpack --color",
+    "test": "ts-node -r tsconfig-paths/register --project tsconfig.json src/index.ts"
+  },
+  "devDependencies": {
+    "@ef-carbon/tspm": "^2.2.5",
+    "@types/node": "^18.15.3",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "antlr4ts-cli": "^0.5.0-alpha.4",
+    "compression-webpack-plugin": "^10.0.0",
+    "eslint": "^8.36.0",
+    "eslint-config-alloy": "^4.9.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-webpack-plugin": "^4.0.0",
+    "fork-ts-checker-webpack-plugin": "^8.0.0",
+    "node": "^19.8.1",
+    "prettier": "^2.8.4",
+    "terser-webpack-plugin": "^5.3.7",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.2",
+    "tsconfig-paths-webpack-plugin": "^4.0.1",
+    "typescript": "^4.9.5",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.76.2",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "antlr4ts": "^0.5.0-alpha.4",
+    "assert": "^2.0.0",
+    "util": "^0.12.5"
+  }
+}
