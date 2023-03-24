@@ -1,6 +1,6 @@
 {
   "name": "@libchrono/core",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Small library to handle durations parsing and displaying.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,6 +9,9 @@
   ],
   "author": "Damian Wileński",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/damianw27/libchrono.git"
+  },
   "scripts": {
     "build-grammar": "antlr4ts -o ./src/generated ./src/antlr/Duration.g4",
     "build-lib": "webpack && tsc-alias -p tsconfig.json",
