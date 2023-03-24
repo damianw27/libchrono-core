@@ -16,13 +16,14 @@ export class DurationUtils {
   public static parse = (input: string): Duration => {
     const parser = DurationUtils.getParser(input);
     const errorListener = new DurationErrorListener();
+    parser.removeErrorListeners();
     parser.addErrorListener(errorListener);
 
     try {
       const result = parser.parseDuration();
 
       const plain = DurationUtils.compute(result);
-      return new Duration(plain);
+      return Duration.of(plain);
     } catch (e) {
       throw new DurationParseError(errorListener);
     }
@@ -31,21 +32,14 @@ export class DurationUtils {
   public static validate = (input: string): ValidationResult => {
     const parser = DurationUtils.getParser(input);
     const errorListener = new DurationErrorListener();
+    parser.removeErrorListeners();
     parser.addErrorListener(errorListener);
+    parser.parseDuration();
 
-    try {
-      parser.parseDuration();
-
-      return {
-        errors: [],
-        isValid: true,
-      };
-    } catch (e) {
-      return {
-        errors: errorListener.errors,
-        isValid: false,
-      };
-    }
+    return {
+      errors: errorListener.errors,
+      isValid: errorListener.errors.length === 0,
+    };
   };
 
   private static getParser = (input: string): DurationParser => {

@@ -2,6 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/%40libchrono%2Fcore.svg)](https://badge.fury.io/js/%40libchrono%2Fcore)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+![](coverage/badge.svg)
 
 @libchrono/core is a library for parsing and validating strings representing durations of time. It provides a convenient way to parse strings like "1w 2h" into `Duration` objects, and provides convenient functions for performing basic math operations on those objects. So whether you need to parse duration strings, or perform calculations on them, @libchrono/core is the perfect library for your project.
 ## Installation
@@ -31,15 +32,9 @@ console.log(duration);
 /**
  * Output:
  * {
- *    plain: {
- *      weeks: 1,
- *      days: 0,
- *      hours: 2,
- *      minutes: 0,
- *      seconds: 0,
- *      millis: 0,
- *    },
  *    timestamp: 612000000,
+ *    toPlainDuration: () => PlainDuration,
+ *    toLiteral: () => string,
  * }
  */
 ```

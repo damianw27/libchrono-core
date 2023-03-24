@@ -5,6 +5,7 @@
     "sourceMap": true,
     "module": "commonjs",
     "allowJs": true,
+    "resolveJsonModule": true,
     "declaration": true,
     "declarationDir": "dist",
     "allowSyntheticDefaultImports": true,
@@ -18,7 +19,6 @@
     "strictPropertyInitialization": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "rootDir": "src",
     "paths": {
       "$root/*": [
         "src/*"
@@ -31,6 +31,9 @@
       ],
       "$terms/*": [
         "src/terms/*"
+      ],
+      "$test/*": [
+        "src/test/*"
       ]
     }
   },
