@@ -1,4 +1,2 @@
-import { DurationUtils } from '$root/core/duration-utils';
-import { Duration } from '$root/core/duration';
-
-export { DurationUtils, Duration };
+export { Duration } from '$core/duration';
+export { DurationUtils } from '$core/duration-utils';

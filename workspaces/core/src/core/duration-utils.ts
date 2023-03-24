@@ -17,26 +17,35 @@ export class DurationUtils {
     const parser = DurationUtils.getParser(input);
     const errorListener = new DurationErrorListener();
     parser.addErrorListener(errorListener);
-    const result = parser.parseDuration();
 
-    if (errorListener.errors.length !== 0) {
+    try {
+      const result = parser.parseDuration();
+
+      const plain = DurationUtils.compute(result);
+      return new Duration(plain);
+    } catch (e) {
       throw new DurationParseError(errorListener);
     }
-
-    const plain = DurationUtils.compute(result);
-    return new Duration(plain);
   };
 
   public static validate = (input: string): ValidationResult => {
     const parser = DurationUtils.getParser(input);
     const errorListener = new DurationErrorListener();
     parser.addErrorListener(errorListener);
-    parser.parseDuration();
 
-    return {
-      errors: errorListener.errors,
-      isValid: errorListener.errors.length === 0,
-    };
+    try {
+      parser.parseDuration();
+
+      return {
+        errors: [],
+        isValid: true,
+      };
+    } catch (e) {
+      return {
+        errors: errorListener.errors,
+        isValid: false,
+      };
+    }
   };
 
   private static getParser = (input: string): DurationParser => {

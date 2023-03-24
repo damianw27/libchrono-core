@@ -8,11 +8,18 @@ const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 
 module.exports = {
+  context: __dirname,
   entry: path.resolve(__dirname, 'src', 'index.ts'),
   mode: 'production',
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'index.js',
+    globalObject: 'this',
+    library: {
+      name: 'libchrono',
+      type: 'umd',
+    },
   },
   resolve: {
     extensions: ['.ts', '.js'],
@@ -39,7 +46,12 @@ module.exports = {
     ],
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        configFile: "./tsconfig.json",
+        mode: "write-dts",
+      }
+    }),
     new UglifyJsPlugin(),
     new ESLintPlugin(),
     new CompressionPlugin(),

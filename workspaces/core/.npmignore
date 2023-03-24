@@ -1,0 +1,7 @@
+/src
+/node_modules
+.prettierrc.json
+.eslintrc.json
+.gitignore
+webpack.config.js
+yarn.lock
