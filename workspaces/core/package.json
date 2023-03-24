@@ -1,13 +1,10 @@
 {
   "name": "@libchrono/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Small library to handle durations parsing and displaying.",
-  "main": "dist/index.js",
+  "main": "dist/libchrono.js",
   "author": "Damian Wileński",
   "license": "MIT",
-  "repository": {
-    "url": "https://github.com/damianw27/libchrono.git"
-  },
   "scripts": {
     "grammar:build": "antlr4ts -o ./src/generated ./src/antlr/Duration.g4",
     "lib:build": "webpack --color",
