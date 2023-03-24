@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "Damian Wileński",
   "repository": {
-    "url": ""
+    "url": "https://github.com/damianw27/libchrono.git"
   },
   "workspaces": [
     "core"
