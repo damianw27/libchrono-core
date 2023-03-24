@@ -1,6 +1,6 @@
 {
   "name": "@libchrono/core",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Small library to handle durations parsing and displaying.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,8 +10,8 @@
   "author": "Damian Wileński",
   "license": "MIT",
   "scripts": {
-    "grammar:build": "antlr4ts -o ./src/generated ./src/antlr/Duration.g4",
-    "lib:build": "webpack",
+    "build-grammar": "antlr4ts -o ./src/generated ./src/antlr/Duration.g4",
+    "build-lib": "webpack && tsc-alias -p tsconfig.json",
     "test": "ts-node -r tsconfig-paths/register --project tsconfig.json src/index.ts"
   },
   "devDependencies": {
@@ -32,6 +32,7 @@
     "terser-webpack-plugin": "^5.3.7",
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.4",
     "tsconfig-paths": "^4.1.2",
     "tsconfig-paths-webpack-plugin": "^4.0.1",
     "typescript": "^4.9.5",
