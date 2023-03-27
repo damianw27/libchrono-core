@@ -2,21 +2,21 @@ import { BaseOperand } from '$terms/types/base-operand';
 import { DurationExpression } from '$terms/duration-expression';
 import { DurationStatement } from '$terms/duration-statement';
 import {
-  DurationContext,
   DurationFactorContext,
+  DurationStatementContext,
 } from '$generated/DurationParser';
-import { PlainDuration } from '$core/types/plain-duration';
 
 export class DurationFactor implements BaseOperand {
   public static of = (context: DurationFactorContext): DurationFactor => {
-    const childContext = context.duration() ?? context.durationExpression();
+    const childContext =
+      context.durationStatement() ?? context.durationExpression();
 
     if (childContext === undefined) {
       throw new Error('Duration factor needs to have child');
     }
 
     const child =
-      childContext instanceof DurationContext
+      childContext instanceof DurationStatementContext
         ? new DurationStatement(childContext)
         : DurationExpression.of(childContext);
 
@@ -27,5 +27,5 @@ export class DurationFactor implements BaseOperand {
     public readonly content: DurationStatement | DurationExpression,
   ) {}
 
-  public solve = (): PlainDuration => this.content.solve();
+  public solve = (): number => this.content.solve();
 }

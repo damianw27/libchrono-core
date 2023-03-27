@@ -11,6 +11,8 @@ import {
   ParseDurationContext,
 } from '$generated/DurationParser';
 import { DurationLexer } from '$generated/DurationLexer';
+import { DurationExpression } from '$terms/duration-expression';
+import { PlainDurationUtils } from '$core/plain-duration-utils';
 
 export class DurationUtils {
   public static parse = (input: string): Duration => {
@@ -50,18 +52,18 @@ export class DurationUtils {
   };
 
   private static compute = (context: ParseDurationContext): PlainDuration => {
-    const childContext = context.duration() ?? context.durationExpression();
+    const childContext =
+      context.durationStatement() ?? context.durationExpression();
 
     if (childContext === undefined) {
       throw new Error('Invalid duration input provided.');
     }
 
-    if (childContext instanceof DurationExpressionContext) {
-      throw new Error(
-        'Arithmetic operations on durations are not supported yet',
-      );
-    }
+    const resultTimestamp =
+      childContext instanceof DurationExpressionContext
+        ? DurationExpression.of(childContext).solve()
+        : new DurationStatement(childContext).solve();
 
-    return new DurationStatement(childContext).solve();
+    return PlainDurationUtils.getPlainDuration(resultTimestamp);
   };
 }

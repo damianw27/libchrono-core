@@ -1,63 +1,31 @@
 import { BaseOperand } from '$terms/types/base-operand';
-import { TermOperator } from '$terms/types/term-operator';
-import {
-  DurationFactorContext,
-  DurationTermContext,
-} from '$generated/DurationParser';
+import { DurationTermContext } from '$generated/DurationParser';
 import { DurationFactor } from '$terms/duration-factor';
-import { PlainDuration } from '$core/types/plain-duration';
-
-interface SolveTermParams {
-  readonly left: PlainDuration;
-  readonly right: PlainDuration;
-}
+import { DurationTermTail } from '$terms/duration-term-tail';
 
 export class DurationTerm implements BaseOperand {
   public static of = (context: DurationTermContext): DurationTerm => {
-    console.log('term context', context);
-    const [left, right] = context.durationFactor();
+    const base = DurationFactor.of(context.durationFactor());
 
-    const operator =
-      context.DIV().length === 0 ? TermOperator.MUL : TermOperator.DIV;
+    const tails = context
+      .durationTermTail()
+      .map((tailContext) => DurationTermTail.of(tailContext));
 
-    return new DurationTerm(left, right, operator);
+    return new DurationTerm(base, tails);
   };
 
   private constructor(
-    public readonly left: DurationFactorContext,
-    public readonly right: DurationFactorContext,
-    public readonly operator: TermOperator,
+    private readonly base: DurationFactor,
+    private readonly tails: DurationTermTail[],
   ) {}
 
-  public solve = (): PlainDuration => {
-    const left = DurationFactor.of(this.left).solve();
-    const right = DurationFactor.of(this.right).solve();
-    return this.solveExpression({ left, right });
-  };
+  public solve = (): number => {
+    let result = this.base.solve();
 
-  private solveExpression = (params: SolveTermParams): PlainDuration => {
-    const { left, right } = params;
+    this.tails.forEach((tail) => {
+      result = tail.apply(result);
+    });
 
-    switch (this.operator) {
-      case TermOperator.MUL:
-        return {
-          weeks: left.weeks * right.weeks,
-          days: left.days * right.days,
-          hours: left.hours * right.hours,
-          minutes: left.minutes * right.minutes,
-          seconds: left.seconds * right.seconds,
-          millis: left.millis * right.millis,
-        };
-
-      case TermOperator.DIV:
-        return {
-          weeks: left.weeks / right.weeks,
-          days: left.days / right.days,
-          hours: left.hours / right.hours,
-          minutes: left.minutes / right.minutes,
-          seconds: left.seconds / right.seconds,
-          millis: left.millis / right.millis,
-        };
-    }
+    return result;
   };
 }

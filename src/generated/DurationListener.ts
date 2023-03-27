@@ -5,9 +5,11 @@ import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
 
 import { ParseDurationContext } from "./DurationParser";
 import { DurationExpressionContext } from "./DurationParser";
+import { DurationExpressionTailContext } from "./DurationParser";
 import { DurationTermContext } from "./DurationParser";
+import { DurationTermTailContext } from "./DurationParser";
 import { DurationFactorContext } from "./DurationParser";
-import { DurationContext } from "./DurationParser";
+import { DurationStatementContext } from "./DurationParser";
 import { WeeksStatementContext } from "./DurationParser";
 import { DaysStatementContext } from "./DurationParser";
 import { HoursStatementContext } from "./DurationParser";
@@ -44,6 +46,17 @@ export interface DurationListener extends ParseTreeListener {
 	exitDurationExpression?: (ctx: DurationExpressionContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `DurationParser.durationExpressionTail`.
+	 * @param ctx the parse tree
+	 */
+	enterDurationExpressionTail?: (ctx: DurationExpressionTailContext) => void;
+	/**
+	 * Exit a parse tree produced by `DurationParser.durationExpressionTail`.
+	 * @param ctx the parse tree
+	 */
+	exitDurationExpressionTail?: (ctx: DurationExpressionTailContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `DurationParser.durationTerm`.
 	 * @param ctx the parse tree
 	 */
@@ -53,6 +66,17 @@ export interface DurationListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitDurationTerm?: (ctx: DurationTermContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `DurationParser.durationTermTail`.
+	 * @param ctx the parse tree
+	 */
+	enterDurationTermTail?: (ctx: DurationTermTailContext) => void;
+	/**
+	 * Exit a parse tree produced by `DurationParser.durationTermTail`.
+	 * @param ctx the parse tree
+	 */
+	exitDurationTermTail?: (ctx: DurationTermTailContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `DurationParser.durationFactor`.
@@ -66,15 +90,15 @@ export interface DurationListener extends ParseTreeListener {
 	exitDurationFactor?: (ctx: DurationFactorContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `DurationParser.duration`.
+	 * Enter a parse tree produced by `DurationParser.durationStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterDuration?: (ctx: DurationContext) => void;
+	enterDurationStatement?: (ctx: DurationStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `DurationParser.duration`.
+	 * Exit a parse tree produced by `DurationParser.durationStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitDuration?: (ctx: DurationContext) => void;
+	exitDurationStatement?: (ctx: DurationStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `DurationParser.weeksStatement`.

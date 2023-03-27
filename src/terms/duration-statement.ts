@@ -1,14 +1,14 @@
 import { BaseOperand } from '$terms/types/base-operand';
 import {
   DaysStatementContext,
-  DurationContext,
+  DurationStatementContext,
   HoursStatementContext,
   MillisecondsStatementContext,
   MinutesStatementContext,
   SecondsStatementContext,
   WeeksStatementContext,
 } from '$generated/DurationParser';
-import { PlainDuration } from '$core/types/plain-duration';
+import { PlainDurationUtils } from '$core/plain-duration-utils';
 
 const digitRegExp = new RegExp(/\d+/g);
 
@@ -23,17 +23,21 @@ type DurationUnits =
   | MillisecondsStatementContext;
 
 export class DurationStatement implements BaseOperand {
-  public constructor(public readonly context: DurationContext) {}
+  public constructor(private readonly context: DurationStatementContext) {}
 
-  public solve = (): PlainDuration => ({
-    weeks: this.extractValue(this.context.weeksStatement()),
-    days: this.extractValue(this.context.daysStatement()),
-    hours: this.extractValue(this.context.hoursStatement()),
-    minutes: this.extractValue(this.context.minutesStatement()),
-    seconds: this.extractValue(this.context.secondsStatement()),
-    millis: this.extractValue(this.context.millisecondsStatement()),
-  });
+  public solve = (): number => {
+    const plainDuration = {
+      weeks: this.extractValue(this.context.weeksStatement()),
+      days: this.extractValue(this.context.daysStatement()),
+      hours: this.extractValue(this.context.hoursStatement()),
+      minutes: this.extractValue(this.context.minutesStatement()),
+      seconds: this.extractValue(this.context.secondsStatement()),
+      millis: this.extractValue(this.context.millisecondsStatement()),
+    };
+
+    return PlainDurationUtils.getTimestamp(plainDuration);
+  };
 
   private extractValue = (context: DurationUnits | undefined): number =>
-    parseInt(context?.text?.match(digitRegExp)?.[0] ?? zeroSign, 10);
+    parseFloat(context?.text?.match(digitRegExp)?.[0] ?? zeroSign);
 }

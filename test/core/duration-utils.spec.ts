@@ -26,6 +26,16 @@ describe('DurationUtils', () => {
       const exampleCall = () => DurationUtils.parse(inputLiteral);
       expect(exampleCall).toThrow(DurationParseError);
     });
+
+    test('should return result of arithmetic operation in literal for simple example', () => {
+      const duration1 = DurationUtils.parse('1w + 10d');
+      expect(duration1.toStringLiteral()).toEqual('2w 3d');
+    });
+
+    test('should return result of arithmetic operation in literal for advanced example', () => {
+      const duration1 = DurationUtils.parse('1w * 3 + 10d / 2');
+      expect(duration1.toStringLiteral()).toEqual('3w 5d');
+    });
   });
 
   describe('#validate', () => {

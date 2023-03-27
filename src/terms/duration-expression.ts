@@ -1,66 +1,33 @@
 import { BaseOperand } from '$terms/types/base-operand';
-import { ExpressionOperator } from '$terms/types/expression-operator';
-import {
-  DurationExpressionContext,
-  DurationTermContext,
-} from '$generated/DurationParser';
+import { DurationExpressionContext } from '$generated/DurationParser';
 import { DurationTerm } from '$terms/duration-term';
-import { PlainDuration } from '$core/types/plain-duration';
-
-interface SolveExpressionParams {
-  readonly left: PlainDuration;
-  readonly right: PlainDuration;
-}
+import { DurationExpressionTail } from '$terms/duration-expression-tail';
 
 export class DurationExpression implements BaseOperand {
   public static of = (
     context: DurationExpressionContext,
   ): DurationExpression => {
-    const [left, right] = context.durationTerm();
+    const base = DurationTerm.of(context.durationTerm());
 
-    const operator =
-      context.ADD().length === 0
-        ? ExpressionOperator.SUB
-        : ExpressionOperator.ADD;
+    const tails = context
+      .durationExpressionTail()
+      .map((tailContext) => DurationExpressionTail.of(tailContext));
 
-    return new DurationExpression(left, right, operator);
+    return new DurationExpression(base, tails);
   };
 
   private constructor(
-    public readonly left: DurationTermContext,
-    public readonly right: DurationTermContext,
-    public readonly operator: ExpressionOperator,
+    private readonly base: DurationTerm,
+    private readonly tails: DurationExpressionTail[],
   ) {}
 
-  public solve = (): PlainDuration => {
-    const left = DurationTerm.of(this.left).solve();
-    const right = DurationTerm.of(this.right).solve();
-    return this.solveExpression({ left, right });
-  };
+  public solve = (): number => {
+    let result = this.base.solve();
 
-  private solveExpression = (params: SolveExpressionParams): PlainDuration => {
-    const { left, right } = params;
+    this.tails.forEach((tail) => {
+      result = tail.apply(result);
+    });
 
-    switch (this.operator) {
-      case ExpressionOperator.ADD:
-        return {
-          weeks: left.weeks + right.weeks,
-          days: left.days + right.days,
-          hours: left.hours + right.hours,
-          minutes: left.minutes + right.minutes,
-          seconds: left.seconds + right.seconds,
-          millis: left.millis + right.millis,
-        };
-
-      case ExpressionOperator.SUB:
-        return {
-          weeks: left.weeks - right.weeks,
-          days: left.days - right.days,
-          hours: left.hours - right.hours,
-          minutes: left.minutes - right.minutes,
-          seconds: left.seconds - right.seconds,
-          millis: left.millis - right.millis,
-        };
-    }
+    return result;
   };
 }
