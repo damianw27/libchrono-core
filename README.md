@@ -32,11 +32,47 @@ console.log(duration);
 /**
  * Output:
  * {
- *    timestamp: 612000000,
- *    toPlainDuration: () => PlainDuration,
- *    toLiteral: () => string,
+ *    timestamp: 612000000,                 // count of millis in duration
+ *    getWeeks: () => number,               // returns current count of weeks
+ *    getDays: () => number,                // returns current count of days
+ *    getHours: () => number,               // returns current count of hours
+ *    getMinutes: () => number,             // returns current count of minutes
+ *    getSeconds: () => number,             // returns current count of seconds
+ *    getMillis: () => number,              // returns current count of millis
+ *    toPlainDuration: () => PlainDuration, // returns object containing all units
+ *    toStringLiteral: () => string,        // returns string like 1d 14h
  * }
  */
+```
+
+Parse duration literal with operations to Duration object:
+
+```js
+const { DurationUtils } = require('@libchrono/core');
+
+const duration = DurationUtils.parse('(1w 2h + 5h + 30m) * 2');
+
+console.log(duration.toStringLiteral()); // Output: 2w 15h
+```
+
+Parse duration literal to Duration object and perform operations:
+
+```js
+const { DurationUtils } = require('@libchrono/core');
+
+const duration = DurationUtils.parse('1w');
+
+console.log(duration.add(DurationUtils.parse('2d')).toStringLiteral());
+// Output: 1w 2d
+
+console.log(duration.sub(DurationUtils.parse('2d')).toStringLiteral());
+// Output: 5d
+
+console.log(duration.mul(2).toStringLiteral());
+// Output: 2w
+
+console.log(duration.div(2).toStringLiteral());
+// Output: 3d 12h
 ```
 
 Validate duration literal
@@ -59,6 +95,8 @@ console.log(duration3.isValid); // Output: false
 
 ## Todo
 
-- support for arithmetic operations in Duration object
-- support for arithmetic operations in duration literal
-- simple format function to display duration literal from timestamp
+- ~~support for arithmetic operations in Duration object~~
+- ~~support for arithmetic operations in duration literal~~
+- ~~simple format function to display duration literal from timestamp~~
+- add option to convert Duration to count of specific unit
+- add option to set schema for duration (assign count of hours in day and days in week)

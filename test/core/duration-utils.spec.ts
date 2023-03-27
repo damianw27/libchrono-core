@@ -36,6 +36,11 @@ describe('DurationUtils', () => {
       const duration1 = DurationUtils.parse('1w * 3 + 10d / 2');
       expect(duration1.toStringLiteral()).toEqual('3w 5d');
     });
+
+    test('should return result of arithmetic operation in literal with nested expression', () => {
+      const duration1 = DurationUtils.parse('(1w 2h + 5h + 30m) * 2');
+      expect(duration1.toStringLiteral()).toEqual('2w 15h');
+    });
   });
 
   describe('#validate', () => {
