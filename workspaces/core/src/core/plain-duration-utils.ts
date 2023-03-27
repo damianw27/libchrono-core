@@ -22,22 +22,36 @@ const literalElementsMap: Record<string, string> = {
 const durationLiteralSeparator = ' ';
 
 export class PlainDurationUtils {
-  public static plainDurationFromTimestamp = (
-    timestamp: number,
-  ): PlainDuration => {
+  public static getPlainDuration = (timestamp: number): PlainDuration => {
     return {
-      weeks: Math.floor(timestamp / millisInWeek),
-      days: Math.floor(timestamp / millisInDay) % daysInWeek,
-      hours: Math.floor(timestamp / millisInHour) % hoursInDay,
-      minutes: Math.floor(timestamp / millisInMinute) % minutesInHour,
-      seconds: Math.floor(timestamp / millisInSecond) % secondsInMinute,
-      millis: timestamp % millisInSecond,
+      weeks: PlainDurationUtils.getWeeks(timestamp),
+      days: PlainDurationUtils.getDays(timestamp),
+      hours: PlainDurationUtils.getHours(timestamp),
+      minutes: PlainDurationUtils.getMinutes(timestamp),
+      seconds: PlainDurationUtils.getSeconds(timestamp),
+      millis: PlainDurationUtils.getMillis(timestamp),
     };
   };
 
-  public static timestampFromPlainDuration = (
-    plainDuration: PlainDuration,
-  ): number => {
+  public static getWeeks = (timestamp: number): number =>
+    Math.floor(timestamp / millisInWeek);
+
+  public static getDays = (timestamp: number): number =>
+    Math.floor(timestamp / millisInDay) % daysInWeek;
+
+  public static getHours = (timestamp: number): number =>
+    Math.floor(timestamp / millisInHour) % hoursInDay;
+
+  public static getMinutes = (timestamp: number): number =>
+    Math.floor(timestamp / millisInMinute) % minutesInHour;
+
+  public static getSeconds = (timestamp: number): number =>
+    Math.floor(timestamp / millisInSecond) % secondsInMinute;
+
+  public static getMillis = (timestamp: number): number =>
+    timestamp % millisInSecond;
+
+  public static getTimestamp = (plainDuration: PlainDuration): number => {
     const millisInWeeks = plainDuration.weeks * millisInWeek;
     const millisInDays = plainDuration.days * millisInDay;
     const millisInHours = plainDuration.hours * millisInHour;
@@ -54,10 +68,9 @@ export class PlainDurationUtils {
     );
   };
 
-  public static stringFromPlainDuration = (
-    plainDuration: PlainDuration,
-  ): string =>
+  public static getStringLiteral = (plainDuration: PlainDuration): string =>
     Object.entries(plainDuration)
+      .filter(([, value]) => value !== 0)
       .map(([key, value]) => `${value}${literalElementsMap[key]}`)
       .join(durationLiteralSeparator);
 }

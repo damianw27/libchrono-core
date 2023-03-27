@@ -6,10 +6,16 @@ parseDuration
   | durationExpression EOF;
 
 durationExpression
-  : durationTerm ((ADD | SUB) durationTerm)*;
+  : durationTerm durationExpressionTail*;
+
+durationExpressionTail
+  : (ADD | SUB) durationExpression;
 
 durationTerm
-  : durationFactor ((MUL | DIV) durationFactor)*;
+  : durationFactor durationTermTail*;
+
+durationTermTail
+  : (MUL | DIV) NUMBER;
 
 durationFactor
   : durationStatement
@@ -55,5 +61,5 @@ HOUR:           'h';
 MINUTE:         'm';
 SECOND:         's';
 MILLISECONDS:   'ms';
-NUMBER:         [0-9]+;
+NUMBER:         [0-9]+ ('.' [0-9]+)?;
 WS:             [ \t\r\n]+ -> skip;
