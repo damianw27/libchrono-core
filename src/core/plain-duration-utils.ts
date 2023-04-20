@@ -21,7 +21,14 @@ const literalElementsMap: Record<string, string> = {
 
 const durationLiteralSeparator = ' ';
 
+/**
+ * Utils class which allows to invoke some operations on timestamp of duration.
+ */
 export class PlainDurationUtils {
+  /**
+   * Method witch allows to converts timestamp in number format to PlainDuration.
+   * @param {number} timestamp - duration timestamp
+   */
   public static getPlainDuration = (timestamp: number): PlainDuration => {
     return {
       weeks: PlainDurationUtils.getWeeks(timestamp),
@@ -33,24 +40,52 @@ export class PlainDurationUtils {
     };
   };
 
+  /**
+   * Method witch allows to extract weeks count from timestamp in number format.
+   * @param {number} timestamp - duration timestamp
+   */
   public static getWeeks = (timestamp: number): number =>
     Math.floor(timestamp / millisInWeek);
 
+  /**
+   * Method witch allows to extract days count from timestamp in number format.
+   * @param {number} timestamp - duration timestamp
+   */
   public static getDays = (timestamp: number): number =>
     Math.floor(timestamp / millisInDay) % daysInWeek;
 
+  /**
+   * Method witch allows to extract hours count from timestamp in number format.
+   * @param {number} timestamp - duration timestamp
+   */
   public static getHours = (timestamp: number): number =>
     Math.floor(timestamp / millisInHour) % hoursInDay;
 
+  /**
+   * Method witch allows to extract minutes count from timestamp in number format.
+   * @param {number} timestamp - duration timestamp
+   */
   public static getMinutes = (timestamp: number): number =>
     Math.floor(timestamp / millisInMinute) % minutesInHour;
 
+  /**
+   * Method witch allows to extract seconds count from timestamp in number format.
+   * @param {number} timestamp - duration timestamp
+   */
   public static getSeconds = (timestamp: number): number =>
     Math.floor(timestamp / millisInSecond) % secondsInMinute;
 
+  /**
+   * Method witch allows to extract milliseconds count from timestamp in number format.
+   * @param {number} timestamp - duration timestamp
+   */
   public static getMillis = (timestamp: number): number =>
     timestamp % millisInSecond;
 
+  /**
+   * Method witch allows to converts PlainDuration to timestamp in number format.
+   * @param {PlainDuration} plainDuration
+   */
   public static getTimestamp = (plainDuration: PlainDuration): number => {
     const millisInWeeks = plainDuration.weeks * millisInWeek;
     const millisInDays = plainDuration.days * millisInDay;
@@ -68,6 +103,10 @@ export class PlainDurationUtils {
     );
   };
 
+  /**
+   * Method which allows to converts PlainDuration to string literal format.
+   * @param {PlainDuration} plainDuration
+   */
   public static getStringLiteral = (plainDuration: PlainDuration): string =>
     Object.entries(plainDuration)
       .filter(([, value]) => value !== 0)

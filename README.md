@@ -41,6 +41,20 @@ console.log(duration);
  *    getMillis: () => number,              // returns current count of millis
  *    toPlainDuration: () => PlainDuration, // returns object containing all units
  *    toStringLiteral: () => string,        // returns string like 1d 14h
+ *    toWeeks: () => number,                // returns count of weeks
+ *    toDays: () => number,                 // returns count of days with weeks 
+ *                                          // converted to days
+ *    toHours: () => number,                // returns count of hours with days 
+ *                                          // and weeks converted to hours
+ *    toMinutes: () => number,              // returns count of minutes with 
+ *                                          // hours, days and weeks converted
+ *                                          // to minutes
+ *    toSeconds: () => number,              // returns count of seconds with
+ *                                          // minutes, hours, days and weeks
+ *                                          // converted to seconds
+ *    toMillis: () => number,               // returns count of millis with
+ *                                          // seconds, minutes, hours and
+ *                                          // weeks converted to millis
  * }
  */
 ```
@@ -98,5 +112,6 @@ console.log(duration3.isValid); // Output: false
 - ~~support for arithmetic operations in Duration object~~
 - ~~support for arithmetic operations in duration literal~~
 - ~~simple format function to display duration literal from timestamp~~
-- add option to convert Duration to count of specific unit
+- ~~add option to convert Duration to count of specific unit~~
+- ~~added JSDoc for methods and classes~~
 - add option to set schema for duration (assign count of hours in day and days in week)

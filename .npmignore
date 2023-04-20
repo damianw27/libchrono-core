@@ -3,5 +3,6 @@
 .prettierrc.json
 .eslintrc.json
 .gitignore
+jsdoc.json
 webpack.config.js
 yarn.lock

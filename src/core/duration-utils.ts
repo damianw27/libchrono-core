@@ -14,7 +14,14 @@ import { DurationLexer } from '$generated/DurationLexer';
 import { DurationExpression } from '$terms/duration-expression';
 import { PlainDurationUtils } from '$core/plain-duration-utils';
 
+/**
+ * Utils class witch allows to convert and validate duration string literals.
+ */
 export class DurationUtils {
+  /**
+   * Method witch allows to parse duration string literals to Duration class.
+   * @param {string} input - duration string literal
+   */
   public static parse = (input: string): Duration => {
     const parser = DurationUtils.getParser(input);
     const errorListener = new DurationErrorListener();
@@ -31,6 +38,10 @@ export class DurationUtils {
     }
   };
 
+  /**
+   * Method witch allows to validate correctness of duration string literals.
+   * @param {string} input - duration string literal
+   */
   public static validate = (input: string): ValidationResult => {
     const parser = DurationUtils.getParser(input);
     const errorListener = new DurationErrorListener();
