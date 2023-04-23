@@ -13,6 +13,7 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "strictPropertyInitialization": true,
+    "skipLibCheck": true,
     "outDir": "./dist",
     "declarationDir": "./dist",
     "baseUrl": ".",
