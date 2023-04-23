@@ -1,13 +1,9 @@
 {
   "compilerOptions": {
     "target": "es2016",
-    "outDir": "./dist",
-    "sourceMap": true,
     "module": "commonjs",
-    "allowJs": true,
     "resolveJsonModule": true,
     "declaration": true,
-    "declarationDir": "dist",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -17,7 +13,8 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "strictPropertyInitialization": true,
-    "skipLibCheck": true,
+    "outDir": "./dist",
+    "declarationDir": "./dist",
     "baseUrl": ".",
     "paths": {
       "$root/*": [
@@ -39,7 +36,10 @@
   },
   "exclude": [
     "node_modules",
+    "dist",
+    "docs",
+    "test",
     "webpack.config.js",
-    "dist"
+    "jest.config.ts"
   ]
 }

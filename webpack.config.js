@@ -1,9 +1,6 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const CompressionPlugin = require("compression-webpack-plugin");
 const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 
@@ -11,7 +8,6 @@ module.exports = {
   context: __dirname,
   entry: path.resolve(__dirname, 'src', 'index.ts'),
   mode: 'production',
-  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
@@ -35,28 +31,23 @@ module.exports = {
     rules: [
       {
         test: /\.[tj]s$/,
-        use: {
-          loader: 'ts-loader',
-          options: {
-            configFile: 'tsconfig.json'
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: 'tsconfig.json'
+            }
           }
-        },
+        ],
         exclude: /node_modules/,
       },
     ],
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin({
-      typescript: {
-        configFile: "./tsconfig.json",
-        mode: "write-dts",
-      }
-    }),
-    new UglifyJsPlugin(),
     new ESLintPlugin(),
-    new CompressionPlugin(),
   ],
   optimization: {
+    minimize: true,
     minimizer: [
       new TerserPlugin({
         terserOptions: {
@@ -78,7 +69,6 @@ module.exports = {
           },
         },
         parallel: true,
-        // sourceMap: shouldUseSourceMap,
       }),
     ],
   },
