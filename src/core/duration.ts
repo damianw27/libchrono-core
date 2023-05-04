@@ -10,8 +10,16 @@ export class Duration {
    * Method allowing to construct new Duration class from PlainDuration.
    * @param {PlainDuration} plainDuration
    */
-  public static of = (plainDuration: PlainDuration): Duration => {
-    const timestamp = PlainDurationUtils.getTimestamp(plainDuration);
+  public static of = (plainDuration: Partial<PlainDuration>): Duration => {
+    const timestamp = PlainDurationUtils.getTimestamp({
+      weeks: 0,
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      millis: 0,
+      ...plainDuration,
+    });
 
     return new Duration(timestamp);
   };
