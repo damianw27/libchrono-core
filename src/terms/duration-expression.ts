@@ -4,9 +4,7 @@ import { DurationTerm } from '$terms/duration-term';
 import { DurationExpressionTail } from '$terms/duration-expression-tail';
 
 export class DurationExpression implements BaseOperand {
-  public static of = (
-    context: DurationExpressionContext,
-  ): DurationExpression => {
+  public static of = (context: DurationExpressionContext): DurationExpression => {
     const base = DurationTerm.of(context.durationTerm());
 
     const tails = context

@@ -6,11 +6,7 @@ import { DurationTermTail } from '$terms/duration-term-tail';
 export class DurationTerm implements BaseOperand {
   public static of = (context: DurationTermContext): DurationTerm => {
     const base = DurationFactor.of(context.durationFactor());
-
-    const tails = context
-      .durationTermTail()
-      .map((tailContext) => DurationTermTail.of(tailContext));
-
+    const tails = context.durationTermTail().map((tailContext) => DurationTermTail.of(tailContext));
     return new DurationTerm(base, tails);
   };
 

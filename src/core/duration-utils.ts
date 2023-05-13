@@ -5,14 +5,11 @@ import { Duration } from '$core/duration';
 import { CharStreams, CommonTokenStream } from 'antlr4ts';
 import { PlainDuration } from '$core/types/plain-duration';
 import { DurationStatement } from '$terms/duration-statement';
-import {
-  DurationExpressionContext,
-  DurationParser,
-  ParseDurationContext,
-} from '$generated/DurationParser';
+import { DurationParser, ParseDurationContext } from '$generated/DurationParser';
 import { DurationLexer } from '$generated/DurationLexer';
 import { DurationExpression } from '$terms/duration-expression';
 import { PlainDurationUtils } from '$core/plain-duration-utils';
+import { isDurationExpressionContext } from '$terms/contexts-guards';
 
 /**
  * Utils class witch allows to convert and validate duration string literals.
@@ -63,17 +60,15 @@ export class DurationUtils {
   };
 
   private static compute = (context: ParseDurationContext): PlainDuration => {
-    const childContext =
-      context.durationStatement() ?? context.durationExpression();
+    const childContext = context.durationStatement() ?? context.durationExpression();
 
     if (childContext === undefined) {
       throw new Error('Invalid duration input provided.');
     }
 
-    const resultTimestamp =
-      childContext instanceof DurationExpressionContext
-        ? DurationExpression.of(childContext).solve()
-        : new DurationStatement(childContext).solve();
+    const resultTimestamp = isDurationExpressionContext(childContext)
+      ? DurationExpression.of(childContext).solve()
+      : new DurationStatement(childContext).solve();
 
     return PlainDurationUtils.getPlainDuration(resultTimestamp);
   };

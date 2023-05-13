@@ -31,7 +31,7 @@
         "src/terms/*"
       ],
       "$test/*": [
-        "src/test/*"
+        "test/*"
       ]
     }
   },
@@ -39,8 +39,6 @@
     "node_modules",
     "dist",
     "docs",
-    "test",
-    "webpack.config.js",
-    "jest.config.ts"
+    "webpack.config.js"
   ]
 }

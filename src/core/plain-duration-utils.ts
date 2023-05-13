@@ -9,6 +9,8 @@ const daysInWeek = 7;
 const hoursInDay = 24;
 const minutesInHour = 60;
 const secondsInMinute = 60;
+const unitsOrder = ['w', 'd', 'h', 'm', 's', 'ms'];
+const durationLiteralSeparator = ' ';
 
 const literalElementsMap: Record<string, string> = {
   weeks: 'w',
@@ -18,8 +20,6 @@ const literalElementsMap: Record<string, string> = {
   seconds: 's',
   millis: 'ms',
 };
-
-const durationLiteralSeparator = ' ';
 
 /**
  * Utils class which allows to invoke some operations on timestamp of duration.
@@ -44,8 +44,7 @@ export class PlainDurationUtils {
    * Method witch allows to extract weeks count from timestamp in number format.
    * @param {number} timestamp - duration timestamp
    */
-  public static getWeeks = (timestamp: number): number =>
-    Math.floor(timestamp / millisInWeek);
+  public static getWeeks = (timestamp: number): number => Math.floor(timestamp / millisInWeek);
 
   /**
    * Method witch allows to extract days count from timestamp in number format.
@@ -79,8 +78,7 @@ export class PlainDurationUtils {
    * Method witch allows to extract milliseconds count from timestamp in number format.
    * @param {number} timestamp - duration timestamp
    */
-  public static getMillis = (timestamp: number): number =>
-    timestamp % millisInSecond;
+  public static getMillis = (timestamp: number): number => timestamp % millisInSecond;
 
   /**
    * Method witch allows to converts PlainDuration to timestamp in number format.
@@ -111,5 +109,21 @@ export class PlainDurationUtils {
     Object.entries(plainDuration)
       .filter(([, value]) => value !== 0)
       .map(([key, value]) => `${value}${literalElementsMap[key]}`)
+      .sort(PlainDurationUtils.sortOverUnits)
       .join(durationLiteralSeparator);
+
+  private static sortOverUnits = (a: string, b: string) => {
+    const aUnitIndex = unitsOrder.indexOf(a.slice(-1));
+    const bUnitIndex = unitsOrder.indexOf(b.slice(-1));
+
+    if (aUnitIndex < bUnitIndex) {
+      return -1;
+    } else if (aUnitIndex > bUnitIndex) {
+      return 1;
+    } else {
+      const aNum = parseInt(a.slice(0, -1), 10);
+      const bNum = parseInt(b.slice(0, -1), 10);
+      return aNum - bNum;
+    }
+  };
 }

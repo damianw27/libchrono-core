@@ -14,7 +14,7 @@ const digitRegExp = new RegExp(/\d+/g);
 
 const zeroSign = '0';
 
-type DurationUnits =
+export type DurationUnits =
   | WeeksStatementContext
   | DaysStatementContext
   | HoursStatementContext

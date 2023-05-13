@@ -8,14 +8,7 @@ export class DurationErrorListener {
   }
 
   // eslint-disable-next-line max-params
-  public syntaxError = (
-    recognizer: any,
-    offendingSymbol: any,
-    line: number,
-    column: number,
-    msg: string,
-    e: any,
-  ): void => {
+  public syntaxError = (r: any, oSymbol: any, line: number, column: number, msg: string): void => {
     const parserError: ParsingError = {
       charPosition: column,
       message: msg,
@@ -24,34 +17,9 @@ export class DurationErrorListener {
     this.errors.push(parserError);
   };
 
-  // eslint-disable-next-line max-params
-  public reportAmbiguity = (
-    recognizer: any,
-    dfa: any,
-    startIndex: number,
-    stopIndex: number,
-    exact: boolean,
-    ambigAlts: any,
-    configs: any,
-  ): void => {};
+  public reportAmbiguity = (): void => {};
 
-  // eslint-disable-next-line max-params
-  public reportAttemptingFullContext = (
-    recognizer: any,
-    dfa: any,
-    startIndex: number,
-    stopIndex: number,
-    conflictingAlts: any,
-    configs: any,
-  ): void => {};
+  public reportAttemptingFullContext = (): void => {};
 
-  // eslint-disable-next-line max-params
-  public reportContextSensitivity = (
-    recognizer: any,
-    dfa: any,
-    startIndex: number,
-    stopIndex: number,
-    conflictingAlts: any,
-    configs: any,
-  ): void => {};
+  public reportContextSensitivity = (): void => {};
 }

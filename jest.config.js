@@ -1,7 +1,7 @@
-import { compilerOptions } from './tsconfig.json';
-import { pathsToModuleNameMapper } from 'ts-jest';
+const { compilerOptions } = require('./tsconfig.json');
+const { pathsToModuleNameMapper } = require('ts-jest');
 
-export default {
+module.exports = {
   roots: ['<rootDir>/src', '<rootDir>/test'],
   testRegex: '(/test/.*|(\\.|/)(test|spec))\\.ts$',
   transform: {
@@ -13,4 +13,12 @@ export default {
   }),
   collectCoverage: true,
   coverageReporters: ['json-summary'],
+  testPathIgnorePatterns: [
+    "/node_modules/",
+    "/dist/",
+    "/test/_helpers_/",
+  ],
+  collectCoverageFrom: [
+    "src/**/{!(ignore-me),}.ts"
+  ]
 };
