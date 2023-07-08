@@ -29,16 +29,14 @@ export class PlainDurationUtils {
    * Method witch allows to converts timestamp in number format to PlainDuration.
    * @param {number} timestamp - duration timestamp
    */
-  public static getPlainDuration = (timestamp: number): PlainDuration => {
-    return {
-      weeks: PlainDurationUtils.getWeeks(timestamp),
-      days: PlainDurationUtils.getDays(timestamp),
-      hours: PlainDurationUtils.getHours(timestamp),
-      minutes: PlainDurationUtils.getMinutes(timestamp),
-      seconds: PlainDurationUtils.getSeconds(timestamp),
-      millis: PlainDurationUtils.getMillis(timestamp),
-    };
-  };
+  public static getPlainDuration = (timestamp: number): PlainDuration => ({
+    weeks: PlainDurationUtils.getWeeks(timestamp),
+    days: PlainDurationUtils.getDays(timestamp),
+    hours: PlainDurationUtils.getHours(timestamp),
+    minutes: PlainDurationUtils.getMinutes(timestamp),
+    seconds: PlainDurationUtils.getSeconds(timestamp),
+    millis: PlainDurationUtils.getMillis(timestamp),
+  });
 
   /**
    * Method witch allows to extract weeks count from timestamp in number format.
@@ -118,12 +116,12 @@ export class PlainDurationUtils {
 
     if (aUnitIndex < bUnitIndex) {
       return -1;
-    } else if (aUnitIndex > bUnitIndex) {
-      return 1;
-    } else {
-      const aNum = parseInt(a.slice(0, -1), 10);
-      const bNum = parseInt(b.slice(0, -1), 10);
-      return aNum - bNum;
     }
+    if (aUnitIndex > bUnitIndex) {
+      return 1;
+    }
+    const aNum = parseInt(a.slice(0, -1), 10);
+    const bNum = parseInt(b.slice(0, -1), 10);
+    return aNum - bNum;
   };
 }

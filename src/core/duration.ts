@@ -113,7 +113,7 @@ export class Duration {
    * Method which allow to returns count of days with weeks converted to days
    */
   public toDays = (): number =>
-    PlainDurationUtils.getDays(this.timestamp) + PlainDurationUtils.getWeeks(this.timestamp) * 7;
+    PlainDurationUtils.getDays(this.timestamp) + +PlainDurationUtils.getWeeks(this.timestamp) * 7;
 
   /**
    * Method which allow to returns count of hours with days and weeks converted

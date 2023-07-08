@@ -1,144 +1,366 @@
-import { DurationListener } from '$generated/DurationListener';
-import {
-  DaysStatementContext,
-  DurationExpressionContext,
-  DurationExpressionTailContext,
-  DurationFactorContext,
-  DurationStatementContext,
-  DurationTermContext,
-  DurationTermTailContext,
-  HoursStatementContext,
-  MillisecondsStatementContext,
-  MinutesStatementContext,
-  ParseDurationContext,
-  SecondsStatementContext,
-  WeeksStatementContext,
-} from '$generated/DurationParser';
+import { DurationListener } from '$generated/duration-listener';
+import { DurationParser } from '$generated/duration-parser';
 import { TerminalNode } from 'antlr4ts/tree/TerminalNode';
 import { ErrorNode } from 'antlr4ts/tree/ErrorNode';
 import { ParserRuleContext } from 'antlr4ts/ParserRuleContext';
+import { DurationLexer } from '$generated/duration-lexer';
+import { CharStreams, CommonTokenStream } from 'antlr4ts';
+import { MillisecondsStatementContext } from '$generated/context/milliseconds-statement-context';
+import { SecondsStatementContext } from '$generated/context/seconds-statement-context';
+import { MinutesStatementContext } from '$generated/context/minutes-statement-context';
+import { HoursStatementContext } from '$generated/context/hours-statement-context';
+import { DaysStatementContext } from '$generated/context/days-statement-context';
+import { WeeksStatementContext } from '$generated/context/weeks-statement-context';
+import { DurationStatementContext } from '$generated/context/duration-statement-context';
+import { DurationFactorContext } from '$generated/context/duration-factor-context';
+import { DurationTermTailContext } from '$generated/context/duration-term-tail-context';
+import { DurationTermContext } from '$generated/context/duration-term-context';
+import { DurationExpressionTailContext } from '$generated/context/duration-expression-tail-context';
+import { DurationExpressionContext } from '$generated/context/duration-expression-context';
+import { ParseDurationContext } from '$generated/context/parse-duration-context';
 
 describe('DurationListener', () => {
   const listener: Required<DurationListener> = {
-    enterParseDuration: (ctx: ParseDurationContext) => {},
-    exitParseDuration: (ctx: ParseDurationContext) => {},
-    enterDurationExpression: (ctx: DurationExpressionContext) => {},
-    exitDurationExpression: (ctx: DurationExpressionContext) => {},
-    enterDurationExpressionTail: (ctx: DurationExpressionTailContext) => {},
-    exitDurationExpressionTail: (ctx: DurationExpressionTailContext) => {},
-    enterDurationTerm: (ctx: DurationTermContext) => {},
-    exitDurationTerm: (ctx: DurationTermContext) => {},
-    enterDurationTermTail: (ctx: DurationTermTailContext) => {},
-    exitDurationTermTail: (ctx: DurationTermTailContext) => {},
-    enterDurationFactor: (ctx: DurationFactorContext) => {},
-    exitDurationFactor: (ctx: DurationFactorContext) => {},
-    enterDurationStatement: (ctx: DurationStatementContext) => {},
-    exitDurationStatement: (ctx: DurationStatementContext) => {},
-    enterWeeksStatement: (ctx: WeeksStatementContext) => {},
-    exitWeeksStatement: (ctx: WeeksStatementContext) => {},
-    enterDaysStatement: (ctx: DaysStatementContext) => {},
-    exitDaysStatement: (ctx: DaysStatementContext) => {},
-    enterHoursStatement: (ctx: HoursStatementContext) => {},
-    exitHoursStatement: (ctx: HoursStatementContext) => {},
-    enterMinutesStatement: (ctx: MinutesStatementContext) => {},
-    exitMinutesStatement: (ctx: MinutesStatementContext) => {},
-    enterSecondsStatement: (ctx: SecondsStatementContext) => {},
-    exitSecondsStatement: (ctx: SecondsStatementContext) => {},
-    enterMillisecondsStatement: (ctx: MillisecondsStatementContext) => {},
-    exitMillisecondsStatement: (ctx: MillisecondsStatementContext) => {},
-    visitTerminal: (node: TerminalNode) => {},
-    visitErrorNode: (node: ErrorNode) => {},
-    enterEveryRule: (ctx: ParserRuleContext) => {},
-    exitEveryRule: (ctx: ParserRuleContext) => {},
+    enterParseDuration: jest.fn((ctx: ParseDurationContext) => {
+    }),
+    exitParseDuration: jest.fn((ctx: ParseDurationContext) => {
+    }),
+    enterDurationExpression: jest.fn((ctx: DurationExpressionContext) => {
+    }),
+    exitDurationExpression: jest.fn((ctx: DurationExpressionContext) => {
+    }),
+    enterDurationExpressionTail: jest.fn((ctx: DurationExpressionTailContext) => {
+    }),
+    exitDurationExpressionTail: jest.fn((ctx: DurationExpressionTailContext) => {
+    }),
+    enterDurationTerm: jest.fn((ctx: DurationTermContext) => {
+    }),
+    exitDurationTerm: jest.fn((ctx: DurationTermContext) => {
+    }),
+    enterDurationTermTail: jest.fn((ctx: DurationTermTailContext) => {
+    }),
+    exitDurationTermTail: jest.fn((ctx: DurationTermTailContext) => {
+    }),
+    enterDurationFactor: jest.fn((ctx: DurationFactorContext) => {
+    }),
+    exitDurationFactor: jest.fn((ctx: DurationFactorContext) => {
+    }),
+    enterDurationStatement: jest.fn((ctx: DurationStatementContext) => {
+    }),
+    exitDurationStatement: jest.fn((ctx: DurationStatementContext) => {
+    }),
+    enterWeeksStatement: jest.fn((ctx: WeeksStatementContext) => {
+    }),
+    exitWeeksStatement: jest.fn((ctx: WeeksStatementContext) => {
+    }),
+    enterDaysStatement: jest.fn((ctx: DaysStatementContext) => {
+    }),
+    exitDaysStatement: jest.fn((ctx: DaysStatementContext) => {
+    }),
+    enterHoursStatement: jest.fn((ctx: HoursStatementContext) => {
+    }),
+    exitHoursStatement: jest.fn((ctx: HoursStatementContext) => {
+    }),
+    enterMinutesStatement: jest.fn((ctx: MinutesStatementContext) => {
+    }),
+    exitMinutesStatement: jest.fn((ctx: MinutesStatementContext) => {
+    }),
+    enterSecondsStatement: jest.fn((ctx: SecondsStatementContext) => {
+    }),
+    exitSecondsStatement: jest.fn((ctx: SecondsStatementContext) => {
+    }),
+    enterMillisecondsStatement: jest.fn((ctx: MillisecondsStatementContext) => {
+    }),
+    exitMillisecondsStatement: jest.fn((ctx: MillisecondsStatementContext) => {
+    }),
+    visitTerminal: jest.fn((node: TerminalNode) => {
+    }),
+    visitErrorNode: jest.fn((node: ErrorNode) => {
+    }),
+    enterEveryRule: jest.fn((ctx: ParserRuleContext) => {
+    }),
+    exitEveryRule: jest.fn((ctx: ParserRuleContext) => {
+    }),
   };
 
-  test('enterParseDuration is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as ParseDurationContext;
-    listener.enterParseDuration(ctx);
-    expect(ctx.text).toEqual('3h');
+  const grammarExample = '1d 1h 1m 1s 1ms';
+
+  const getParserWithAddedListener = (): DurationParser => {
+    const input = CharStreams.fromString(grammarExample);
+    const lexer = new DurationLexer(input);
+    const tokenStream = new CommonTokenStream(lexer);
+    const parser = new DurationParser(tokenStream);
+    parser.addParseListener(listener);
+    return parser;
+  };
+
+  describe('enterParseDuration', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as ParseDurationContext;
+
+      listener.enterParseDuration(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.enterParseDuration).toHaveBeenCalledTimes(2);
+    });
   });
 
-  test('exitParseDuration is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as ParseDurationContext;
-    listener.exitParseDuration(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('exitParseDuration', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as ParseDurationContext;
+
+      listener.exitParseDuration(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.exitParseDuration).toHaveBeenCalledTimes(3);
+    });
   });
 
-  test('enterDurationExpression is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as DurationExpressionContext;
-    listener.enterDurationExpression(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('enterDurationExpression', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as DurationExpressionContext;
+
+      listener.enterDurationExpression(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.enterDurationExpression).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test('exitDurationExpression is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as DurationExpressionContext;
-    listener.exitDurationExpression(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('exitDurationExpression', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as DurationExpressionContext;
+
+      listener.exitDurationExpression(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.exitDurationExpression).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test('enterDurationExpressionTail is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as DurationExpressionTailContext;
-    listener.enterDurationExpressionTail(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('enterDurationExpressionTail', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as DurationExpressionTailContext;
+
+      listener.enterDurationExpressionTail(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.enterDurationExpressionTail).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test('exitDurationExpressionTail is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as DurationExpressionTailContext;
-    listener.exitDurationExpressionTail(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('exitDurationExpressionTail', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as DurationExpressionTailContext;
+
+      listener.exitDurationExpressionTail(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.exitDurationExpressionTail).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test('enterDurationTerm is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as DurationTermContext;
-    listener.enterDurationTerm(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('enterDurationTerm', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as DurationTermContext;
+
+      listener.enterDurationTerm(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.enterDurationTerm).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test('exitDurationTerm is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as DurationTermContext;
-    listener.exitDurationTerm(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('exitDurationTerm', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as DurationTermContext;
+
+      listener.exitDurationTerm(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.exitDurationTerm).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test('enterDurationTermTail is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as DurationTermTailContext;
-    listener.enterDurationTermTail(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('enterDurationTermTail', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as DurationTermTailContext;
+
+      listener.enterDurationTermTail(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.enterDurationTermTail).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test('exitDurationTermTail is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as DurationTermTailContext;
-    listener.exitDurationTermTail(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('exitDurationTermTail', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as DurationTermTailContext;
+
+      listener.exitDurationTermTail(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.exitDurationTermTail).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test('enterDurationFactor is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as DurationFactorContext;
-    listener.enterDurationFactor(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('enterDurationFactor', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as DurationFactorContext;
+
+      listener.enterDurationFactor(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.enterDurationFactor).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test('exitDurationFactor is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as DurationFactorContext;
-    listener.exitDurationFactor(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('exitDurationFactor', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as DurationFactorContext;
+
+      listener.exitDurationFactor(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.exitDurationFactor).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test('enterDurationStatement is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as DurationStatementContext;
-    listener.enterDurationStatement(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('enterDurationStatement', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as DurationStatementContext;
+
+      listener.enterDurationStatement(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.enterDurationStatement).toHaveBeenCalledTimes(14);
+    });
   });
 
-  test('exitDurationStatement is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as DurationStatementContext;
-    listener.exitDurationStatement(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('exitDurationStatement', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as DurationStatementContext;
+
+      listener.exitDurationStatement(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.exitDurationStatement).toHaveBeenCalledTimes(15);
+    });
   });
 
-  test('enterWeeksStatement is called with correct context', () => {
-    const ctx = { text: '3h' } as unknown as WeeksStatementContext;
-    listener.enterWeeksStatement(ctx);
-    expect(ctx.text).toEqual('3h');
+  describe('enterWeeksStatement', () => {
+    test('should be called with correct context', () => {
+      const ctx = { text: '3h' } as unknown as WeeksStatementContext;
+
+      listener.enterWeeksStatement(ctx);
+
+      expect(ctx.text).toEqual('3h');
+    });
+
+    test('should be called in parser context', () => {
+      const parser = getParserWithAddedListener();
+
+      parser.parseDuration();
+
+      expect(listener.enterWeeksStatement).toHaveBeenCalledTimes(1);
+    });
   });
 });

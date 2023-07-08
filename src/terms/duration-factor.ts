@@ -1,8 +1,8 @@
 import { BaseOperand } from '$terms/types/base-operand';
 import { DurationExpression } from '$terms/duration-expression';
 import { DurationStatement } from '$terms/duration-statement';
-import { DurationFactorContext } from '$generated/DurationParser';
 import { isDurationStatementContext } from '$terms/contexts-guards';
+import { DurationFactorContext } from '$generated/context/duration-factor-context';
 
 export class DurationFactor implements BaseOperand {
   public static of = (context: DurationFactorContext): DurationFactor => {

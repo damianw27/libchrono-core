@@ -3,50 +3,58 @@ grammar Duration;
 // GRAMMAR
 parseDuration
   : durationStatement EOF
-  | durationExpression EOF;
+  | durationExpression EOF
+  ;
 
 durationExpression
-  : durationTerm durationExpressionTail*;
+  : durationTerm durationExpressionTail*
+  ;
 
 durationExpressionTail
-  : (ADD | SUB) durationExpression;
+  : (ADD | SUB) durationExpression
+  ;
 
 durationTerm
-  : durationFactor durationTermTail*;
+  : durationFactor durationTermTail*
+  ;
 
 durationTermTail
-  : (MUL | DIV) NUMBER;
+  : (MUL | DIV) NUMBER
+  ;
 
 durationFactor
   : durationStatement
-  | LP durationExpression RP;
+  | LP durationExpression RP
+  ;
 
 durationStatement
-  : weeksStatement?
-    daysStatement?
-    hoursStatement?
-    minutesStatement?
-    secondsStatement?
-    millisecondsStatement?;
+  : weeksStatement? daysStatement? hoursStatement? minutesStatement? secondsStatement? millisecondsStatement?
+  ;
 
 weeksStatement
-  : NUMBER WEEK;
+  : NUMBER WEEK
+  ;
 
 daysStatement
-  : NUMBER DAY;
+  : NUMBER DAY
+  ;
 
 hoursStatement
-  : NUMBER HOUR;
+  : NUMBER HOUR
+  ;
 
 minutesStatement
-  : NUMBER MINUTE;
+  : NUMBER MINUTE
+  ;
 
 secondsStatement
-  : NUMBER SECOND;
+  : NUMBER SECOND
+  ;
 
 millisecondsStatement
   : NUMBER MILLISECONDS
-  | NUMBER;
+  | NUMBER
+  ;
 
 // LEXER
 ADD:            '+';

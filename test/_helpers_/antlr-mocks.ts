@@ -1,16 +1,14 @@
-import {
-  DurationExpressionContext,
-  DurationExpressionTailContext,
-  DurationFactorContext,
-  DurationStatementContext,
-  DurationTermContext,
-  DurationTermTailContext,
-  ParseDurationContext,
-} from '$generated/DurationParser';
 import { TermOperator } from '$terms/types/term-operator';
 import { ExpressionOperator } from '$terms/types/expression-operator';
 import { DurationUnits } from '$terms/duration-statement';
 import { TerminalNode } from 'antlr4ts/tree/TerminalNode';
+import { DurationStatementContext } from '$generated/context/duration-statement-context';
+import { DurationFactorContext } from '$generated/context/duration-factor-context';
+import { DurationTermTailContext } from '$generated/context/duration-term-tail-context';
+import { DurationTermContext } from '$generated/context/duration-term-context';
+import { DurationExpressionTailContext } from '$generated/context/duration-expression-tail-context';
+import { DurationExpressionContext } from '$generated/context/duration-expression-context';
+import { ParseDurationContext } from '$generated/context/parse-duration-context';
 
 const mockDurationUnitContext = (text?: string): DurationUnits =>
   ({ text } as unknown as DurationUnits);

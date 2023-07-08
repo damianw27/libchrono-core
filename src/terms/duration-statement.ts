@@ -1,14 +1,12 @@
 import { BaseOperand } from '$terms/types/base-operand';
-import {
-  DaysStatementContext,
-  DurationStatementContext,
-  HoursStatementContext,
-  MillisecondsStatementContext,
-  MinutesStatementContext,
-  SecondsStatementContext,
-  WeeksStatementContext,
-} from '$generated/DurationParser';
 import { PlainDurationUtils } from '$core/plain-duration-utils';
+import { MillisecondsStatementContext } from '$generated/context/milliseconds-statement-context';
+import { SecondsStatementContext } from '$generated/context/seconds-statement-context';
+import { MinutesStatementContext } from '$generated/context/minutes-statement-context';
+import { HoursStatementContext } from '$generated/context/hours-statement-context';
+import { DaysStatementContext } from '$generated/context/days-statement-context';
+import { WeeksStatementContext } from '$generated/context/weeks-statement-context';
+import { DurationStatementContext } from '$generated/context/duration-statement-context';
 
 const digitRegExp = new RegExp(/\d+/g);
 

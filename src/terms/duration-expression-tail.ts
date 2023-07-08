@@ -1,7 +1,7 @@
 import { ExpressionOperator } from '$terms/types/expression-operator';
-import { DurationExpressionTailContext } from '$generated/DurationParser';
 import { DurationExpression } from '$terms/duration-expression';
 import { BaseTail } from '$terms/types/base-tail';
+import { DurationExpressionTailContext } from '$generated/context/duration-expression-tail-context';
 
 export class DurationExpressionTail implements BaseTail {
   public static of = (context: DurationExpressionTailContext): DurationExpressionTail => {

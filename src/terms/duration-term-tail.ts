@@ -1,6 +1,6 @@
 import { TermOperator } from '$terms/types/term-operator';
-import { DurationTermTailContext } from '$generated/DurationParser';
 import { BaseTail } from '$terms/types/base-tail';
+import { DurationTermTailContext } from '$generated/context/duration-term-tail-context';
 
 export class DurationTermTail implements BaseTail {
   public static of = (context: DurationTermTailContext): DurationTermTail => {

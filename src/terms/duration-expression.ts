@@ -1,7 +1,8 @@
 import { BaseOperand } from '$terms/types/base-operand';
-import { DurationExpressionContext } from '$generated/DurationParser';
 import { DurationTerm } from '$terms/duration-term';
 import { DurationExpressionTail } from '$terms/duration-expression-tail';
+import { DurationExpressionTailContext } from '$generated/context/duration-expression-tail-context';
+import { DurationExpressionContext } from '$generated/context/duration-expression-context';
 
 export class DurationExpression implements BaseOperand {
   public static of = (context: DurationExpressionContext): DurationExpression => {
@@ -9,7 +10,7 @@ export class DurationExpression implements BaseOperand {
 
     const tails = context
       .durationExpressionTail()
-      .map((tailContext) => DurationExpressionTail.of(tailContext));
+      .map((tailContext: DurationExpressionTailContext) => DurationExpressionTail.of(tailContext));
 
     return new DurationExpression(base, tails);
   };

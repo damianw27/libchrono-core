@@ -1,6 +1,6 @@
 import { DurationExpression } from '$terms/duration-expression';
-import { DurationExpressionContext } from '$generated/DurationParser';
 import { AntlrMocks } from '$test/_helpers_/antlr-mocks';
+import { DurationExpressionContext } from '$generated/context/duration-expression-context';
 
 describe('DurationExpression', () => {
   const antlrMocks = new AntlrMocks();

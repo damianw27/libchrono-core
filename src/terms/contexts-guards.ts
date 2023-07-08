@@ -1,4 +1,5 @@
-import { DurationExpressionContext, DurationStatementContext } from '$generated/DurationParser';
+import { DurationStatementContext } from '$generated/context/duration-statement-context';
+import { DurationExpressionContext } from '$generated/context/duration-expression-context';
 
 export const isDurationStatementContext = (target: any): target is DurationStatementContext =>
   'weeksStatement' in target &&

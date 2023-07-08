@@ -7,8 +7,13 @@ export class DurationErrorListener {
     this.errors = [];
   }
 
-  // eslint-disable-next-line max-params
-  public syntaxError = (r: any, oSymbol: any, line: number, column: number, msg: string): void => {
+  public syntaxError = (
+    r: unknown,
+    o: unknown,
+    line: number,
+    column: number,
+    msg: string,
+  ): void => {
     const parserError: ParsingError = {
       charPosition: column,
       message: msg,
